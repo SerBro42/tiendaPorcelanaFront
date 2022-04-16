@@ -38,43 +38,40 @@
   <div class="col py-3">
       <!--zona de contenido-->
       <div class="container d-flex custom-container">
-        <form class="row g-3 requires-validation p-3" novalidate method="post" action="http://www.formular-chef.de/fc.cgi" enctype="multipart/form-data">
+        <form [formGroup]="contactForm"  (ngSubmit)="onSubmit()" class="row g-3 requires-validation p-3" novalidate >
         <input type="hidden" name="empfaenger" value="serbro7@gmail.com" />
         <div class="col-12">
           <p class="h1">Contact us</p>
         </div>
           <div class="form-floating mb-3 mt-3">
             <input formControlName="name" [class.is-invalid]="nameField.touched && nameField.invalid" type="text" class="form-control" id="name" required>
-            <div class="invalid-feedback">
-                Please insert your name
-            </div>
-            <label for="inputName" >Name</label>
+            <label for="name" >Name</label>
+            <div *ngIf="nameField.touched && nameField.hasError('required')" class="d-block invalid-feedback">Please insert a name.</div>
+            <div *ngIf="nameField.touched && nameField.hasError('name')" class="d-block invalid-feedback">Non-valid name.</div>
           </div>
           <div class="col-md-6 form-floating mb-3 mt-3">
-            <input type="email" class="form-control" id="inputEmail4" required>
-            <div class="invalid-feedback">
-                Please insert a valid email
-             </div>
-            <label for="inputEmail4" class="form-label">Email</label>
+            <input formControlName="email" [class.is-invalid]="emailField.touched && emailField.invalid" type="email" class="form-control" id="email" required>
+            <label for="email" class="form-label">Email</label>
+            <div *ngIf="emailField.touched && emailField.hasError('required')" class="d-block invalid-feedback">Please insert an email.</div>
+            <div *ngIf="emailField.touched && emailField.hasError('email')" class="d-block invalid-feedback">Non-valid email.</div>
           </div>
           <div class="col-md-6 form-floating mb-3 mt-3">
-            <input type="tel" class="form-control" id="inputTel">
+            <input type="tel" class="form-control" id="phone">
             <div class="invalid-feedback">
                 Please insert a valid phone number
              </div>
-            <label for="inputTel" class="form-label">Telephone</label>
+            <label for="phone" class="form-label">Telephone</label>
           </div>
           <div class="form-floating mb-3 mt-3">
-            <textarea class="form-control" id="textarea" rows="3" required></textarea>
-            <div class="invalid-feedback">
-                Required field
-            </div>
-            <label for="textarea" >Submit your message</label>
+            <textarea formControlName="message" [class.is-invalid]="messageField.touched && messageField.invalid" class="form-control" id="message" rows="3" required></textarea>
+            <label for="message" >Submit your message</label>
+            <div *ngIf="messageField.touched && messageField.hasError('required')" class="d-block invalid-feedback">Please insert your message.</div>
+            <div *ngIf="messageField.touched && messageField.hasError('message')" class="d-block invalid-feedback">Message must be at least 10 characters long.</div>
           </div>
 
           <div class="row justify-content-end">
             <div class="col-2">
-              <input type="submit" id="register-submit" class="btn primaryButton" value="Submit Message">
+              <button [disabled]="contactForm.invalid" type="submit" id="register-submit" class="btn primaryButton">Submit</button>
             </div>
           </div>
         </form>

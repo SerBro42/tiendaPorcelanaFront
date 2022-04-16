@@ -16,7 +16,7 @@ export class ContactComponent implements OnInit {
     this.contactForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      mensaje: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      message: new FormControl('', [Validators.required, Validators.minLength(10)]),
     })
   }
 
@@ -30,6 +30,10 @@ export class ContactComponent implements OnInit {
 
   get messageField(): any {
     return this.contactForm.get('message');
+  }
+
+  onSubmit(){
+    //TO DO
   }
 
 }
