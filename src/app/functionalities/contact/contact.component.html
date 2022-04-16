@@ -1,0 +1,86 @@
+<main class="container-fluid">
+  <div class="row d-flex flex-md-row">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 custom-aside d-none d-sm-block">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-90">
+          <header href="/" class="d-flex align-items-center p-3 mb-md-0 me-md-auto text-black">
+              <span class="fs-5 d-none d-sm-inline">About us</span>
+          </header>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+              <li class="nav-item">
+                  <p class="align-middle px-0 text-black">
+                      <span class="ms-1 d-none d-sm-inline">For orders and enquiries</span>
+                  </p>
+              </li>
+              <a class="dropdown-toggle text-black text-decoration-none" href="#" id="navbardrop" data-bs-toggle="dropdown">
+                Telephone number
+              </a>
+              <ul class="dropdown-menu">
+                <li><p class="dropdown-item" >Spain Tel/WhatsApp (+34) 666 666 666</p></li>
+                <li><p class="dropdown-item" >Russia Tel/WhatsApp (+7) 966 666 66 66</p></li>
+              </ul>
+              <li>
+                    <p class="text-black">info@bc-porcelain.com</p>
+              </li>
+              <li>
+                <form action="products.html">
+                  <input type="submit" value="Discount products" class="primaryButton"/>
+                </form>
+              </li>
+              <li>
+                <form action="contact-us.html">
+                  <input type="submit" value="Contact us" class="secondaryButton"/>
+                </form>
+              </li>
+          </ul>
+
+      </div>
+  </div>
+  <div class="col py-3">
+      <!--zona de contenido-->
+      <div class="container d-flex custom-container">
+        <form class="row g-3 requires-validation p-3" novalidate method="post" action="http://www.formular-chef.de/fc.cgi" enctype="multipart/form-data">
+        <input type="hidden" name="empfaenger" value="serbro7@gmail.com" />
+        <div class="col-12">
+          <p class="h1">Contact us</p>
+        </div>
+          <div class="form-floating mb-3 mt-3">
+            <input formControlName="name" [class.is-invalid]="nameField.touched && nameField.invalid" type="text" class="form-control" id="name" required>
+            <div class="invalid-feedback">
+                Please insert your name
+            </div>
+            <label for="inputName" >Name</label>
+          </div>
+          <div class="col-md-6 form-floating mb-3 mt-3">
+            <input type="email" class="form-control" id="inputEmail4" required>
+            <div class="invalid-feedback">
+                Please insert a valid email
+             </div>
+            <label for="inputEmail4" class="form-label">Email</label>
+          </div>
+          <div class="col-md-6 form-floating mb-3 mt-3">
+            <input type="tel" class="form-control" id="inputTel">
+            <div class="invalid-feedback">
+                Please insert a valid phone number
+             </div>
+            <label for="inputTel" class="form-label">Telephone</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <textarea class="form-control" id="textarea" rows="3" required></textarea>
+            <div class="invalid-feedback">
+                Required field
+            </div>
+            <label for="textarea" >Submit your message</label>
+          </div>
+
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <input type="submit" id="register-submit" class="btn primaryButton" value="Submit Message">
+            </div>
+          </div>
+        </form>
+      </div>
+
+  </div>
+</div>
+
+</main>
