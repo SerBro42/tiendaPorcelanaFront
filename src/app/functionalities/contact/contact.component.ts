@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
     this.contactForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.pattern('[- +()0-9]+')]),
       message: new FormControl('', [Validators.required, Validators.minLength(10)]),
     })
   }
@@ -32,8 +33,8 @@ export class ContactComponent implements OnInit {
     return this.contactForm.get('message');
   }
 
-  onSubmit(){
-    //TO DO
+  onSubmit(form: any){
+    console.log(form.value);
   }
 
 }
