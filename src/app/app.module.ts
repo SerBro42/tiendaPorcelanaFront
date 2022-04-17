@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,9 +12,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AsideComponent } from './components/aside/aside.component';
 
 import { ContactModule } from './functionalities/contact/contact.module';
+import { LoginModule } from './functionalities/login/login.module';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,17 +24,23 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     FooterComponent,
     NavbarComponent,
     AsideComponent,
-    SigninComponent,
-    SignupComponent,
-    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ContactModule,
-    HttpClientModule
+    LoginModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
