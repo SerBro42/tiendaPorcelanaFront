@@ -10,6 +10,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AsideComponent } from './components/aside/aside.component';
 
 import { ContactModule } from './functionalities/contact/contact.module';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { ContactModule } from './functionalities/contact/contact.module';
     FooterComponent,
     NavbarComponent,
     AsideComponent,
+    SigninComponent,
+    SignupComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
