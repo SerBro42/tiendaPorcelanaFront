@@ -3,11 +3,7 @@ import { Router } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
-
-export class User {
-  name: any;
-  email: any;
-}
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-header',

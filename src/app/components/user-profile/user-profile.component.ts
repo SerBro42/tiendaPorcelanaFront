@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
-
-export class User {
-  name: any;
-  email: any;
-}
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-user-profile',
