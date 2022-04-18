@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
+
+export class User {
+  name: any;
+  email: any;
+}
 
 @Component({
   selector: 'app-header',
@@ -11,11 +17,18 @@ import { TokenService } from 'src/app/shared/token.service';
 export class HeaderComponent implements OnInit {
 
   isSignedIn!: boolean;
+  UserProfile!: User;
+
   constructor(
     private auth: AuthStateService,
     public router: Router,
-    public token: TokenService
-  ) { }
+    public token: TokenService,
+    public authService: AuthService
+  ) {
+    this.authService.profileUser().subscribe((data: any) => {
+      this.UserProfile = data;
+    });
+   }
 
   ngOnInit(): void {
     this.auth.userAuthState.subscribe((val) => {

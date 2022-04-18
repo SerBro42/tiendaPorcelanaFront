@@ -11,7 +11,8 @@
         <input class="form-control me-2 mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-outline-warning my-2 my-sm-0" type="button">Search</button>
       </form> -->
-      <button class="btn btn-outline-primary" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
+      <div><p *ngIf="isSignedIn" class="card-text">Welcome, <strong>{{UserProfile?.name}}</strong></p></div>
+      <button class="btn btn-outline-warning my-2" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
     </div>
   </div>
 </header>
