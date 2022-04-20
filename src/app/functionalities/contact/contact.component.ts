@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ContactFormService } from 'src/app/shared/contact-form.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +13,11 @@ export class ContactComponent implements OnInit {
 
   contactForm!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private contactFormService: ContactFormService,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
     this.contactForm = new FormGroup({
@@ -35,6 +42,12 @@ export class ContactComponent implements OnInit {
 
   onSubmit(form: any){
     console.log(form.value);
+    this.contactFormService.insertarFormulario(this.contactForm.value).subscribe();
+    this.contactForm.reset();
+    let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+        });
   }
 
 }
