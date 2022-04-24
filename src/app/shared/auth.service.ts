@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class User {
   name!: String;
   email!: String;
+  address?: String;
   password!: String;
   password_confirmation!: String;
 }
