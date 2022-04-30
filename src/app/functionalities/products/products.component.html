@@ -1,7 +1,21 @@
 <div class="container-lg">
+  <form class="form mt-3">
+    <div class="form-group row">
+      <label for="filterNombre" class="col-form-label col-sm-2 text-sm-right">Filter products by name:</label>
+      <div class="col-sm-5">
+        <input name="filterNombre" type="text" [(ngModel)]="filterNombre" class="form-control" placeholder="Product name...">
+      </div>
+      <label class="col-form-label col-sm-5">
+        Filtered by: {{filterNombre}}
+      </label>
+    </div>
+  </form>
+</div>
+
+<div class="container-lg">
   <div class="col py-3">
     <div class="container my-1 mx-3 row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4  g-3 custom-container">
-      <app-product-card *ngFor="let p of products" [producto]="p"></app-product-card>
+      <app-product-card *ngFor="let p of products | productFilter:filterNombre" [producto]="p"></app-product-card>
     </div>
   </div>
 
