@@ -17,6 +17,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProductsComponent } from './functionalities/products/products.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductCardModule } from './components/product-card/product-card.module';
+import { ProductsModule } from './functionalities/products/products.module';
 
 @NgModule({
   declarations: [
@@ -31,9 +34,10 @@ import { ProductsComponent } from './functionalities/products/products.component
     AppRoutingModule,
     ContactModule,
     LoginModule,
+    ProductsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {
