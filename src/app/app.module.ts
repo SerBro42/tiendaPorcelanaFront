@@ -16,6 +16,7 @@ import { LoginModule } from './functionalities/login/login.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ProductsComponent } from './functionalities/products/products.component';
 
 @NgModule({
   declarations: [
