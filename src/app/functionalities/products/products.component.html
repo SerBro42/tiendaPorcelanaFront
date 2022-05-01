@@ -10,6 +10,19 @@
       </label>
     </div>
   </form>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="form-group">
+      <label for="image">Post image of product</label>
+      <input type="file" formControlName="image" name="image" id="image" class="form-control"
+      (change)="uploadImage($event)" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+
+      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+        <div *ngIf="f.image.errors.required">Image required</div>
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-dark btn-sm mt-4">Submit image</button>
+  </form>
 </div>
 
 <div class="container-lg">

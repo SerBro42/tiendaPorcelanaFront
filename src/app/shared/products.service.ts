@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../classes/product';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
+
+  uploadData(data: any) {
+  const headers = new HttpHeaders();
+  return this.http.post(environment.apiUrl+'/api/product/', data, {
+    headers: headers
+  });
+}
 
   getProductos(): Product[] {
     return[{

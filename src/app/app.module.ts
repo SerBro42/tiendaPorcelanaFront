@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +40,8 @@ import { ProductsModule } from './functionalities/products/products.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     {
