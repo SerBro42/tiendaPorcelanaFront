@@ -10,19 +10,56 @@
       </label>
     </div>
   </form>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="form-group">
-      <label for="image">Post image of product</label>
-      <input type="file" formControlName="image" name="image" id="image" class="form-control"
-      (change)="uploadImage($event)" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+  <div *ngIf="UserProfile?.id_role == 0" class="my-1 mx-3 custom-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="form-group">
 
-      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-        <div *ngIf="f.image.errors.required">Image required</div>
+        <label for="prod_name">Insert product name</label>
+        <input type="text" formControlName="prod_name" name="prod_name" id="prod_name" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.prod_name.errors }">
+
+        <div *ngIf="submitted && f.prod_name.errors" class="invalid-feedback">
+          <div *ngIf="f.prod_name.errors.required">Name required</div>
+        </div>
+
+        <label for="prod_name">Insert product code</label>
+        <input type="text" formControlName="cod_prod" name="cod_prod" id="cod_prod" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.cod_prod.errors }">
+
+        <div *ngIf="submitted && f.cod_prod.errors" class="invalid-feedback">
+          <div *ngIf="f.cod_prod.errors.required">Product code required</div>
+        </div>
+
+        <label for="id_cat">Select product category</label>
+        <select name="id_cat" class="form-select" id="id_cat" formControlName="id_cat">
+          <option  *ngFor="let c of prodCategories" [ngValue]="c.id">
+            {{c.nombre}}
+          </option>
+        </select>
+
+        <div *ngIf="submitted && f.id_cat.errors" class="invalid-feedback">
+          <div *ngIf="f.id_cat.errors.required">Product category required</div>
+        </div>
+
+        <label for="prod_desc">Insert product description</label>
+        <input type="text" formControlName="prod_desc" name="prod_desc" id="prod_desc" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.prod_desc.errors }">
+
+        <div *ngIf="submitted && f.prod_desc.errors" class="invalid-feedback">
+        </div>
+
+        <label for="image">Post image of product</label>
+        <input type="file" formControlName="image" name="image" id="image" class="form-control"
+        (change)="uploadImage($event)" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+
+        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+          <div *ngIf="f.image.errors.required">Image required</div>
+        </div>
+
       </div>
-
-    </div>
-    <button type="submit" class="btn btn-dark btn-sm mt-4">Submit image</button>
-  </form>
+      <button type="submit" class="btn btn-dark btn-sm mt-4">Submit product</button>
+    </form>
+  </div>
 </div>
 
 <div class="container-lg">

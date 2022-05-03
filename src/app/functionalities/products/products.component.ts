@@ -3,6 +3,10 @@ import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angula
 import { ProductsService } from 'src/app/shared/products.service';
 import { Product } from 'src/app/classes/product';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/auth.service';
+import { ProductCatService } from 'src/app/shared/product-cat.service';
+import { User } from 'src/app/classes/user';
+import { Categoria } from 'src/app/classes/categoria';
 
 @Component({
   selector: 'app-products',
@@ -12,30 +16,43 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
+  prodCategories: Categoria[] = [];
+  catSelected:Categoria=undefined!;
   files:any;
   submitted = false;
   data:any;
   form!: FormGroup;
-  //post = new Post();
+  UserProfile!: User;
 
 
   constructor(
     private productsService: ProductsService,
+    private productCatService: ProductCatService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
-    ) { }
-
-
+    private toastr: ToastrService,
+    public authService: AuthService
+    ) {
+      this.authService.profileUser().subscribe((data: any) => {
+        this.UserProfile = data;
+      });
+     }
 
   filterNombre = "";
 
   ngOnInit(): void {
     this.products = this.productsService.getProductos();
+    this.productCatService.dropDownShow().subscribe(res => {
+      this.prodCategories = res;
+    });
     this.createForm();
   }
 
   createForm() {
     this.form = this.formBuilder.group({
+      prod_name: [null, Validators.required],
+      cod_prod: [null, Validators.required],
+      id_cat: [null, Validators.required],
+      prod_desc: [null],
       image: [null, Validators.required]
     })
   }
@@ -51,12 +68,17 @@ export class ProductsComponent implements OnInit {
       return;
     }
     const formData = new FormData();
+    formData.append("prod_name", this.form.get('prod_name')?.value);
+    formData.append("cod_prod", this.form.get('cod_prod')?.value);
+    formData.append("id_cat", this.form.get('id_cat')?.value);
+    formData.append("prod_desc", this.form.get('prod_desc')?.value);
     formData.append("image", this.files, this.files.name);
 
     this.productsService.uploadData(formData).subscribe(res => {
       this.data = res;
       console.log(this.data);
     });
+    this.form.reset();
   }
 
   uploadImage(event: any) {

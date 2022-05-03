@@ -11,11 +11,11 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   uploadData(data: any) {
-  const headers = new HttpHeaders();
-  return this.http.post(environment.apiUrl+'/api/product/', data, {
-    headers: headers
-  });
-}
+    const headers = new HttpHeaders();
+    return this.http.post(environment.apiUrl+'/api/product/', data, {
+      headers: headers
+    });
+  }
 
   getProductos(): Product[] {
     return[{
