@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../classes/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,9 @@ export class ProductsService {
       descripcion: 'Robbe & Berking silver tableware. Belvedere collection.',
       imagen: 'assets/belvedere.jpg',
     }];
+  }
+
+  getProductosHTTP():Observable<Product[]>{
+    return this.http.get<Product[]>(environment.apiUrl+'/api/showProducts/');
   }
 }

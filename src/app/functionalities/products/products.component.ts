@@ -40,7 +40,13 @@ export class ProductsComponent implements OnInit {
   filterNombre = "";
 
   ngOnInit(): void {
-    this.products = this.productsService.getProductos();
+    //Esta función es para mostrar productos del array de productsService
+    //this.products = this.productsService.getProductos();
+
+    //Esta función es para mostrar los productos de la BD
+     this.productsService.getProductosHTTP().subscribe(res =>{
+       this.products = res;
+     });
     this.productCatService.dropDownShow().subscribe(res => {
       this.prodCategories = res;
     });
