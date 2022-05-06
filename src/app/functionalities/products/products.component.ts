@@ -85,6 +85,7 @@ export class ProductsComponent implements OnInit {
       console.log(this.data);
     });
     this.form.reset();
+    this.toastr.success('Product uploaded successfully', 'Product upload status');
   }
 
   uploadImage(event: any) {
