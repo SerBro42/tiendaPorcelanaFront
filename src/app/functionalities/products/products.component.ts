@@ -83,9 +83,28 @@ export class ProductsComponent implements OnInit {
     this.productsService.uploadData(formData).subscribe(res => {
       this.data = res;
       console.log(this.data);
+      //El siguiente toastr con if/else podría no estar funcionando
+      if(this.data.status = true) {
+        this.toastr.success(JSON.stringify(this.data.message), 'Product upload successful', {
+          timeOut: 2000,
+          progressBar: true
+        })
+      } else {
+        this.toastr.error(JSON.stringify(this.data.message), '', {
+          timeOut: 2000,
+          progressBar: true
+        })
+      }
+      // this.submitted = false;
+      // this.form.reset();
     });
+    this.submitted = false;
     this.form.reset();
-    this.toastr.success('Product uploaded successfully', 'Product upload status');
+    //Este toastr SÍ funciona
+    this.toastr.success('Product uploaded successfully', '', {
+      timeOut: 2000,
+      progressBar: true
+    });
   }
 
   uploadImage(event: any) {
