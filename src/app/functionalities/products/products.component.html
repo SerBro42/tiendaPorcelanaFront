@@ -10,7 +10,7 @@
       </label>
     </div>
   </form>
-  <div *ngIf="UserProfile?.id_role == 0" class="my-1 mx-3 custom-container">
+  <div *ngIf="UserProfile?.id_role == 0" class="my-1 mx-3 p-3 custom-container">
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <div class="form-group">
 
@@ -46,6 +46,15 @@
         [ngClass]="{ 'is-invalid': submitted && f.prod_desc.errors }">
 
         <div *ngIf="submitted && f.prod_desc.errors" class="invalid-feedback">
+        </div>
+
+        <label for="precio">Insert product price</label>
+        <input type="number" formControlName="precio" name="precio" id="precio" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.precio.errors, 'is-valid': submitted && f.precio.valid }">
+
+        <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+          <div *ngIf="f.precio.errors?.required">Product price required</div>
+          <div *ngIf="f.precio.errors?.pattern">Price pattern must be 0000.00</div>
         </div>
 
         <label for="image">Post image of product</label>

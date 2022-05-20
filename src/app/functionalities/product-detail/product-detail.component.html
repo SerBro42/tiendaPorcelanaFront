@@ -1,0 +1,19 @@
+<div class="card container" >
+  <img [src]="product.imagen ? imagePath+product.imagen : 'assets/noimage.jpg'" class="card-img-top img-fluid" alt="product image">
+  <div class="card-body">
+    <div class="h4 card-title">{{product.nombre}}</div>
+    <p class="card-text">{{product.descripcion}}</p>
+  </div>
+  <hr>
+  <div class="card-footer text-muded">
+    <div>Precio: {{product.precio | currency:'EUR':'symbol'}}</div>
+  </div>
+  <div class="d-flex flex-row justify-content-around">
+    <div class="col d-flex justify-content-start">
+      <button class="btn btn-danger ml-3" (click)="deleteProduct()">Delete</button>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-primary ml-3" (click)="goBack()">Return</button>
+    </div>
+  </div>
+</div>

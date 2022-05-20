@@ -22,6 +22,7 @@ import { ProductsComponent } from './functionalities/products/products.component
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductCardModule } from './components/product-card/product-card.module';
 import { ProductsModule } from './functionalities/products/products.module';
+import { ProductDetailComponent } from './functionalities/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ProductsModule } from './functionalities/products/products.module';
     FooterComponent,
     NavbarComponent,
     AsideComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,10 @@
       <h4 class="card-title">{{data.nombre}}</h4>
       <p class="card-text">Category: {{getCategoryName(data.id_cat)}}</p>
       <p class="card-text">{{data.descripcion}}</p>
-      <a href="#" class="btn secondaryButton w-100 mt-auto">More information</a>
+      <div class="card-footer text-muded">
+        <div>Price: {{data.precio | currency:'EUR':'symbol'}}</div>
+      </div>
+      <a [routerLink]="[data.id]" class="btn secondaryButton w-100 mt-auto">More information</a>
     </div>
   </div>
 </div>

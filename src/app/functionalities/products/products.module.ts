@@ -6,6 +6,7 @@ import { ProductCardModule } from 'src/app/components/product-card/product-card.
 import { FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from 'src/app/pipes/product-filter.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ProductCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+  ],
+  exports: [
+    ProductsComponent
   ]
 })
 export class ProductsModule {}

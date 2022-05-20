@@ -59,6 +59,7 @@ export class ProductsComponent implements OnInit {
       cod_prod: [null, Validators.required],
       id_cat: [null, Validators.required],
       prod_desc: [null],
+      precio: [null, Validators.required, Validators.pattern(/^\d{0,4}(\.\d{2})?$/)],
       image: [null, Validators.required]
     })
   }
@@ -78,6 +79,7 @@ export class ProductsComponent implements OnInit {
     formData.append("cod_prod", this.form.get('cod_prod')?.value);
     formData.append("id_cat", this.form.get('id_cat')?.value);
     formData.append("prod_desc", this.form.get('prod_desc')?.value);
+    formData.append("precio", this.form.get('precio')?.value);
     formData.append("image", this.files, this.files.name);
 
     this.productsService.uploadData(formData).subscribe(res => {
