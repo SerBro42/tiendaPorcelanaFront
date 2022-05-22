@@ -5,6 +5,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ import { ProductDetailComponent } from './functionalities/product-detail/product
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     {

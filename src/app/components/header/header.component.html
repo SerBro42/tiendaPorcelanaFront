@@ -14,8 +14,17 @@
       <div>
         <p *ngIf="isSignedIn" class="card-text">Welcome, <strong>{{UserProfile?.name}}</strong></p>
       </div>
-      <button class="btn btn-outline-warning my-2" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
-      <button class="btn btn-outline-warning my-2" (click)="signIn()" *ngIf="!isSignedIn">Log in</button>
+      <div class="d-flex flex-row">
+        <div class="col">
+          <button class="btn btn-outline-warning my-2"><fa-icon [icon]="faShoppingCart"></fa-icon></button>
+        </div>
+        <div *ngIf="isSignedIn" class="col">
+          <button class="btn btn-outline-warning my-2" (click)="signOut()">Log out</button>
+        </div>
+        <div *ngIf="!isSignedIn" class="col">
+          <button class="btn btn-outline-warning my-2" (click)="signIn()">Log in</button>
+        </div>
+      </div>
     </div>
   </div>
 </header>

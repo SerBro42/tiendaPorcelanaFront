@@ -4,6 +4,7 @@ import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
 import { User } from 'src/app/classes/user';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
   isSignedIn!: boolean;
   UserProfile!: User;
+  faShoppingCart = faShoppingCart;
+
 
   constructor(
     private auth: AuthStateService,
