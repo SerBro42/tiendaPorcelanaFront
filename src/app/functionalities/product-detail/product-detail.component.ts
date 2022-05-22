@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/classes/product';
+import { User } from 'src/app/classes/user';
+import { AuthService } from 'src/app/shared/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,14 +13,19 @@ import { environment } from 'src/environments/environment';
 export class ProductDetailComponent implements OnInit {
 
   product!: Product;
+  UserProfile!: User;
   imagePath: any = environment.apiUrl+'/storage/images/';
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              ) { }
+              public authService: AuthService
+              ) {
+                this.authService.profileUser().subscribe((data: any) => {
+                  this.UserProfile = data;
+                });
+               }
 
   ngOnInit(): void {
-    //this.product = this.route.snapshot.data['product'];
     console.log(
       'Activated route data in Component:::',
       this.route.data
