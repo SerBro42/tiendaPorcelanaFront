@@ -2,7 +2,9 @@
   <img [src]="product.imagen ? imagePath+product.imagen : 'assets/noimage.jpg'" class="card-img-top img-fluid" alt="product image">
   <div class="card-body">
     <div class="h4 card-title">{{product.nombre}}</div>
+    <p class="card-text">Category: {{getCategoryName(product.id_cat)}}</p>
     <p class="card-text">{{product.descripcion}}</p>
+    <p class="card-text">{{product.cod_prod}}</p>
   </div>
   <hr>
   <div class="card-footer text-muded">

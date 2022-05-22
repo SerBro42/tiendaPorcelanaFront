@@ -3,7 +3,8 @@
     <img class="card-img-top" [src]="data.imagen ? imagePath+data.imagen : 'assets/noimage.jpg'" alt="product image" style="width:100%">
     <div class="card-body d-flex flex-column">
       <h4 class="card-title">{{data.nombre}}</h4>
-      <p class="card-text">Category: {{getCategoryName(data.id_cat)}}</p>
+      <!--If category names are called here, the page makes too many HTTP requests (error 429)-->
+      <!-- <p class="card-text">Category: {{getCategoryName(data.id_cat)}}</p> -->
       <p class="card-text">{{data.descripcion}}</p>
       <div class="card-footer text-muded">
         <div>Price: {{data.precio | currency:'EUR':'symbol'}}</div>

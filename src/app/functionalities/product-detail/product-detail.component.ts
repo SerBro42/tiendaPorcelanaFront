@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Categoria } from 'src/app/classes/categoria';
 import { Product } from 'src/app/classes/product';
 import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/shared/auth.service';
+import { ProductCatService } from 'src/app/shared/product-cat.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,16 +16,22 @@ export class ProductDetailComponent implements OnInit {
 
   product!: Product;
   UserProfile!: User;
+  prodCategories: Categoria[] = [];
   imagePath: any = environment.apiUrl+'/storage/images/';
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              public authService: AuthService
-              ) {
-                this.authService.profileUser().subscribe((data: any) => {
-                  this.UserProfile = data;
-                });
-               }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public authService: AuthService,
+    public prodCatService: ProductCatService,
+    ) {
+      this.authService.profileUser().subscribe((data: any) => {
+        this.UserProfile = data;
+      });
+      this.prodCatService.dropDownShow().subscribe((data: any) => {
+        this.prodCategories = data;
+      });
+    }
 
   ngOnInit(): void {
     console.log(
@@ -40,6 +48,11 @@ export class ProductDetailComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/products']);
+  }
+
+  getCategoryName(id: any) {
+    let category = this.prodCategories.filter(function(item) {return item.id === id})[0];
+    return category.nombre;
   }
 
   deleteProduct(){

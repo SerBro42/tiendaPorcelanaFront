@@ -28,6 +28,7 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //temprarily unused function
   getCategoryName(id: any) {
     let category = this.prodCategories.filter(function(item) {return item.id === id})[0];
     return category.nombre;
