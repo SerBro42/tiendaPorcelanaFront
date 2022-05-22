@@ -1,6 +1,6 @@
 <div class="col">
   <div class="card h-100" >
-    <img class="card-img-top" [src]="data.imagen ? imagePath+data.imagen : 'assets/noimage.jpg'" alt="{{data.nombre}} image" style="width:100%">
+    <img class="card-img-top" [src]="data.imagen ? imagePath+data.imagen : 'assets/noimage.jpg'" alt="product image" style="width:100%">
     <div class="card-body d-flex flex-column">
       <h4 class="card-title">{{data.nombre}}</h4>
       <p class="card-text">Category: {{getCategoryName(data.id_cat)}}</p>
@@ -8,7 +8,14 @@
       <div class="card-footer text-muded">
         <div>Price: {{data.precio | currency:'EUR':'symbol'}}</div>
       </div>
-      <a [routerLink]="[data.id]" class="btn secondaryButton w-100 mt-auto">More information</a>
+      <div class="d-flex flex-row ">
+        <div class="col">
+          <a [routerLink]="[data.id]" class="btn secondaryButton w-100 mt-auto">More information</a>
+        </div>
+        <div *ngIf="userProfileRole === 1" class="col">
+          <a href="#" class="btn primaryButton w-100 mt-auto">Add to cart</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

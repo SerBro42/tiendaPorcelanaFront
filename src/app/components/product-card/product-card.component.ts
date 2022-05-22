@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/classes/categoria';
 import { Product } from 'src/app/classes/product';
+import { User } from 'src/app/shared/auth.service';
 import { ProductCatService } from 'src/app/shared/product-cat.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProductCardComponent implements OnInit {
 
   @Input('producto') data!: Product;
+  @Input() userProfileRole?: number;
   prodCategories: Categoria[] = [];
   imagePath: any = environment.apiUrl+'/storage/images/';
 
