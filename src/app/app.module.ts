@@ -24,6 +24,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { ProductCardModule } from './components/product-card/product-card.module';
 import { ProductsModule } from './functionalities/products/products.module';
 import { ProductDetailComponent } from './functionalities/product-detail/product-detail.component';
+import { CartComponent } from './functionalities/cart/cart.component';
+import { CartItemComponent } from './functionalities/cart/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ProductDetailComponent } from './functionalities/product-detail/product
     NavbarComponent,
     AsideComponent,
     ProductDetailComponent,
+    CartComponent,
+    CartItemComponent,
   ],
   imports: [
     BrowserModule,

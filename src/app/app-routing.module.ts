@@ -9,6 +9,7 @@ import { LoginComponent } from './functionalities/login/login.component';
 import { ProductsComponent } from './functionalities/products/products.component';
 import { ProductDetailComponent } from './functionalities/product-detail/product-detail.component';
 import { ProductsResolverService } from './resolvers/products-resolver.service';
+import { CartComponent } from './functionalities/cart/cart.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'home'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'products/:id',
     component: ProductDetailComponent,
     resolve: {product: ProductsResolverService}},
+  { path: 'cart', component: CartComponent},
 ];
 
 @NgModule({

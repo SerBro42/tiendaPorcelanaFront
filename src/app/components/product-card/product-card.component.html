@@ -14,7 +14,7 @@
           <a [routerLink]="[data.id]" class="btn secondaryButton w-100 mt-auto">More information</a>
         </div>
         <div *ngIf="userProfileRole === 1" class="col">
-          <a href="#" class="btn primaryButton w-100 mt-auto">Add to cart</a>
+          <button class="btn primaryButton w-100 mt-auto" (click)="addToCart(data.id)">Add to cart</button>
         </div>
       </div>
     </div>
