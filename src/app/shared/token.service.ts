@@ -42,4 +42,9 @@ export class TokenService {
   removeToken() {
     localStorage.removeItem('auth_token');
   }
+
+  // Remove cart token from localStorage
+  removeCartToken() {
+    localStorage.removeItem('shopping_cart');
+  }
 }

@@ -15,7 +15,7 @@
         <p *ngIf="isSignedIn" class="card-text">Welcome, <strong>{{UserProfile?.name}}</strong></p>
       </div>
       <div class="d-flex flex-row">
-        <div class="col">
+        <div *ngIf="isSignedIn && UserProfile.id_role === 1" class="col">
           <a class="btn btn-outline-warning my-2" href="cart"><fa-icon [icon]="faShoppingCart"></fa-icon></a>
         </div>
         <div *ngIf="isSignedIn" class="col">
