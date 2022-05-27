@@ -10,6 +10,7 @@ export class TokenService {
   };
 
   constructor() { }
+
   handleData(token: any) {
     localStorage.setItem('auth_token', token);
   }
@@ -43,8 +44,4 @@ export class TokenService {
     localStorage.removeItem('auth_token');
   }
 
-  // Remove cart token from localStorage
-  removeCartToken() {
-    localStorage.removeItem('shopping_cart');
-  }
 }

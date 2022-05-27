@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
 import { User } from 'src/app/classes/user';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
     private auth: AuthStateService,
     public router: Router,
     public token: TokenService,
-    public authService: AuthService
+    public authService: AuthService,
+    public cartService: CartService,
   ) {
     this.authService.profileUser().subscribe((data: any) => {
       this.UserProfile = data;
@@ -39,6 +41,7 @@ export class HeaderComponent implements OnInit {
   signOut() {
     this.auth.setAuthState(false);
     this.token.removeToken();
+    this.cartService.removeCartToken();
     this.router.navigate(['login']);
   }
 
