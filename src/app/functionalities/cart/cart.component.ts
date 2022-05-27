@@ -22,7 +22,9 @@ export class CartComponent implements OnInit {
   constructor(
     private msg: MessengerService
   ) {
-    this.cartItems = JSON.parse(localStorage.getItem('shopping_cart')!);
+    if (localStorage.getItem('shopping_cart') != null){
+      this.cartItems = JSON.parse(localStorage.getItem('shopping_cart')!);
+    }
   }
 
   ngOnInit() {
