@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ContactFormService } from 'src/app/shared/contact-form.service';
 
 @Component({
@@ -17,6 +18,8 @@ export class ContactComponent implements OnInit {
     private http: HttpClient,
     private contactFormService: ContactFormService,
     private router: Router,
+    private toastr: ToastrService,
+
     ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,10 @@ export class ContactComponent implements OnInit {
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
         });
+    this.toastr.success('Form submitted successfully', '', {
+      timeOut: 2000,
+      progressBar: true
+    });
   }
 
 }
