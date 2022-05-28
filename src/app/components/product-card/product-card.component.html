@@ -5,7 +5,7 @@
       <h4 class="card-title">{{data.nombre}}</h4>
       <!--If category names are called here, the page makes too many HTTP requests (error 429)-->
       <!-- <p class="card-text">Category: {{getCategoryName(data.id_cat)}}</p> -->
-      <p class="card-text">{{data.descripcion}}</p>
+      <p class="card-text">{{data.descripcion | slice: 0:50}}</p>
       <div class="card-footer text-muded">
         <div>Price: {{data.precio | currency:'EUR':'symbol'}}</div>
       </div>
