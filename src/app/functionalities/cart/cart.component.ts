@@ -84,6 +84,6 @@ export class CartComponent implements OnInit {
   onDeleteCartItem(event: any) {
     this.cartItems = this.cartItems.filter((item: any) => item !== event);
     localStorage.setItem('shopping_cart', JSON.stringify(this.cartItems));
-
+    window.location.reload();
   }
 }

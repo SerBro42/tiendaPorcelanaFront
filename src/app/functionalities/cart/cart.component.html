@@ -4,7 +4,7 @@
 
   <ul *ngIf="cartItems.length > 0" class="list-group">
     <li class="list group-item my-2" *ngFor="let item of cartItems">
-      <app-cart-item [cartItem]="item" (cartItemDeleted)="onDeleteCartItem($event) "></app-cart-item>
+      <app-cart-item [cartItem]="item" (cartItemDeleted)="onDeleteCartItem($event)"></app-cart-item>
     </li>
 
     <li class="list-group-item active mt-3">
