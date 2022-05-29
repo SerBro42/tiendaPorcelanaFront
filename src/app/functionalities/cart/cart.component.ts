@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/classes/product';
 import { MessengerService } from 'src/app/shared/messenger.service';
+import { faCashRegister } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cart',
@@ -18,20 +19,38 @@ export class CartComponent implements OnInit {
   ];
 
   cartTotal = 0;
+  faCashRegister = faCashRegister;
 
   constructor(
     private msg: MessengerService
   ) {
-    if (localStorage.getItem('shopping_cart') != null){
-      this.cartItems = JSON.parse(localStorage.getItem('shopping_cart')!);
-    }
+    this.loadCartItems();
+    this.totalCostCalculation();
   }
 
   ngOnInit() {
+    this.handleSubscription();
+    this.loadCartItems();
+  }
+
+  handleSubscription() {
     this.msg.getMsg().subscribe((product: any) => {
       console.log('Cart component receiving message :::',product);
       this.addProductToCart(product);
     })
+  }
+
+  totalCostCalculation() {
+    this.cartItems.forEach((item: any) => {
+      this.cartTotal += (item.qty * item.price)
+    });
+  }
+
+  //In the tutorial, this method uses cartService.getCartItems() to retrieve cart items
+  loadCartItems() {
+    if (localStorage.getItem('shopping_cart') != null){
+      this.cartItems = JSON.parse(localStorage.getItem('shopping_cart')!);
+    };
   }
 
   addProductToCart(product:any) {
@@ -60,10 +79,11 @@ export class CartComponent implements OnInit {
     console.log('Shopping cart: ', JSON.parse(retrievedShoppingCart!));
 
     //this.cartItems = JSON.parse(retrievedShoppingCart!);
+  }
 
-    this.cartTotal = 0;
-    this.cartItems.forEach((item: { qty: number; price: number; }) => {
-      this.cartTotal += (item.qty * item.price)
-    });
+  onDeleteCartItem(event: any) {
+    this.cartItems = this.cartItems.filter((item: any) => item !== event);
+    localStorage.setItem('shopping_cart', JSON.stringify(this.cartItems));
+
   }
 }

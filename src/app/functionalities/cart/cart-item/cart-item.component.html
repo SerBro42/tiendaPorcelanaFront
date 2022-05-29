@@ -1,1 +1,1 @@
-<span>{{cartItem.productName}}</span> * <span>{{cartItem.qty}}</span>: <strong>{{ (cartItem.qty * cartItem.price) | currency:'EUR':'symbol'}}</strong>
+<span>{{cartItem.productName}}</span> * <span>{{cartItem.qty}}</span>: <strong>{{ (cartItem.qty * cartItem.price) | currency:'EUR':'symbol'}}</strong> <div class="btn btn-danger mx-2" (click)="removeFromCart()">Remove</div>

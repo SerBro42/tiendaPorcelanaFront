@@ -3,12 +3,19 @@
   <div *ngIf="cartItems.length === 0" class="alert alert-info">Your cart is empty</div>
 
   <ul *ngIf="cartItems.length > 0" class="list-group">
-    <li class="list group-item" *ngFor="let item of cartItems">
-      <app-cart-item [cartItem]="item"></app-cart-item>
+    <li class="list group-item my-2" *ngFor="let item of cartItems">
+      <app-cart-item [cartItem]="item" (cartItemDeleted)="onDeleteCartItem($event) "></app-cart-item>
     </li>
 
     <li class="list-group-item active mt-3">
       <strong>Total: {{ this.cartTotal | currency:'EUR':'symbol'}}</strong>
     </li>
   </ul>
+  <div class="row justify-content-end my-4">
+    <div class="col-3">
+      <div class="btn primaryButton">
+        <fa-icon [icon]="faCashRegister"></fa-icon> &nbsp; &nbsp; <span>Check out</span>
+      </div>
+    </div>
+  </div>
 </div>

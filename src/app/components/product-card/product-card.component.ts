@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/shared/products.service';
 import { ProductCatService } from 'src/app/shared/product-cat.service';
 import { environment } from 'src/environments/environment';
 import { MessengerService } from 'src/app/shared/messenger.service';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -23,6 +24,7 @@ export class ProductCardComponent implements OnInit {
     public prodCatService: ProductCatService,
     public productsService: ProductsService,
     private msg: MessengerService,
+    private cartService: CartService,
   ) {
     this.prodCatService.dropDownShow().subscribe((data: any) => {
       this.prodCategories = data;
@@ -43,8 +45,11 @@ export class ProductCardComponent implements OnInit {
     //it is here only to provide product id for the console.log
     this.productsService.getAddToCart(id);
     console.log('Add to cart clicked :::', this.data);
-    //New function
-    this.msg.sendMsg(this.data);
+    //New function. TO DO
+    //this.cartService.addProductToCart(this.data).subscribe(() =>{
+      this.msg.sendMsg(this.data);
+    //})
+
   }
 
 }
