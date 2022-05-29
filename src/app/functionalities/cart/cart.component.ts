@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/classes/product';
 import { MessengerService } from 'src/app/shared/messenger.service';
 import { faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { CustomerService } from 'src/app/shared/customer.service';
+import { User } from 'src/app/classes/user';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,12 +24,22 @@ export class CartComponent implements OnInit {
 
   cartTotal = 0;
   faCashRegister = faCashRegister;
+  UserProfile!: User;
+  data:any;
+
 
   constructor(
-    private msg: MessengerService
+    private msg: MessengerService,
+    private toastr: ToastrService,
+    private customerService: CustomerService,
+    public authService: AuthService,
+
   ) {
     this.loadCartItems();
     this.totalCostCalculation();
+    this.authService.profileUser().subscribe((data: any) => {
+      this.UserProfile = data;
+    });
   }
 
   ngOnInit() {
@@ -85,5 +99,23 @@ export class CartComponent implements OnInit {
     this.cartItems = this.cartItems.filter((item: any) => item !== event);
     localStorage.setItem('shopping_cart', JSON.stringify(this.cartItems));
     window.location.reload();
+  }
+
+
+  makePurchase() {
+    let dataToSend: any = {
+      "id_cliente" : this.UserProfile.id
+    }
+    this.customerService.createCustomer(dataToSend).subscribe(res => {
+      console.log(res)
+    });
+
+    console.log(this.UserProfile.id);
+    console.log(dataToSend);
+
+    this.toastr.success('Thank you for your purchase!', '', {
+      timeOut: 2000,
+      progressBar: true
+    });
   }
 }
