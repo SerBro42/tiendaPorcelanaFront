@@ -82,4 +82,8 @@ export class ProductsService {
   getAddToCart(id: number): Observable<Product>{
     return this.http.get<Product>(environment.apiUrl+`/api/add-to-cart/${id}`).pipe(map(resp => resp));
   }
+
+  deleteProduct(id: number): Observable<void>{
+    return this.http.delete<void>(environment.apiUrl+`/api/products/${id}`);
+  }
 }
