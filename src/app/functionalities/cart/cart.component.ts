@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from 'src/app/shared/customer.service';
 import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/shared/auth.service';
+import { OrderService } from 'src/app/shared/order.service';
+import { InvoiceRowService } from 'src/app/shared/invoice-row.service';
 
 @Component({
   selector: 'app-cart',
@@ -33,6 +35,8 @@ export class CartComponent implements OnInit {
     private toastr: ToastrService,
     private customerService: CustomerService,
     public authService: AuthService,
+    public orderService: OrderService,
+    private invoiceRowService: InvoiceRowService,
 
   ) {
     this.loadCartItems();
@@ -103,15 +107,41 @@ export class CartComponent implements OnInit {
 
 
   makePurchase() {
-    let dataToSend: any = {
+    let customerIDtoSend: any = {
       "id_cliente" : this.UserProfile.id
     }
-    this.customerService.createCustomer(dataToSend).subscribe(res => {
+    //If the User was not a Customer, they become a Customer
+    this.customerService.createCustomer(customerIDtoSend).subscribe(res => {
       console.log(res)
     });
+    //Creation of an Order entity
+    this.orderService.createOrder(customerIDtoSend).subscribe(res => {
+      console.log(res)
+    });
+    //Check latest order ID, then insert invoice rows there
+    let idUltimoPedido = 0;
+    this.orderService.getLatestOrder().subscribe(res => {
+      console.log('Latest order info: ',res)
+      idUltimoPedido = res.id_pedido;
+      console.log('id del pedido actual', idUltimoPedido);
+      for (let i=0; i < retrievedShoppingCart.length; i++){
+        let data: any = {
+          "id_pedido": idUltimoPedido,
+          "cantidad": retrievedShoppingCart[i].qty,
+          "id_prod": retrievedShoppingCart[i].productId,
+          "precio": retrievedShoppingCart[i].price
+        }
+        this.invoiceRowService.createInvoiceRow(data).subscribe(res => {
+          console.log(res)
+        })
+      }
+    });
+
+    let retrievedShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')!);
+    console.log('Shopping cart being processed: ', retrievedShoppingCart);
 
     console.log(this.UserProfile.id);
-    console.log(dataToSend);
+    console.log(customerIDtoSend);
 
     this.toastr.success('Thank you for your purchase!', '', {
       timeOut: 2000,
