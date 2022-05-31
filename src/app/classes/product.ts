@@ -4,6 +4,7 @@ export class Product {
   cod_prod: any;
   id_cat: any;
   descripcion: any;
+  cantidad: any;
   imagen: any;
   precio: any;
 }

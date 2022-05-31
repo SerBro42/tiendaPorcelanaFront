@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/classes/categoria';
 import { Product } from 'src/app/classes/product';
@@ -19,6 +20,10 @@ export class ProductDetailComponent implements OnInit {
   UserProfile!: User;
   prodCategories: Categoria[] = [];
   imagePath: any = environment.apiUrl+'/storage/images/';
+  form!: FormGroup;
+  submitted = false;
+  data:any;
+
 
   constructor(
     private router: Router,
@@ -26,6 +31,7 @@ export class ProductDetailComponent implements OnInit {
     public authService: AuthService,
     public prodCatService: ProductCatService,
     public productsService: ProductsService,
+    private formBuilder: FormBuilder,
     ) {
       this.authService.profileUser().subscribe((data: any) => {
         this.UserProfile = data;
@@ -33,6 +39,7 @@ export class ProductDetailComponent implements OnInit {
       this.prodCatService.dropDownShow().subscribe((data: any) => {
         this.prodCategories = data;
       });
+      this.createForm();
     }
 
   ngOnInit(): void {
@@ -63,6 +70,38 @@ export class ProductDetailComponent implements OnInit {
       this.productsService.deleteProduct(this.product.id!).subscribe( ()=> this.router.navigate(['/products']),
       error => console.error(error));
     }
+  }
+
+  createForm() {
+    this.form = this.formBuilder.group({
+      cantidad: [null],
+    })
+  }
+
+  get f() {
+    return this.form.controls;
+  }
+
+  onSubmit() {
+    const prodId =this.product.id;
+    this.submitted = true;
+
+    if(this.form.invalid) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append("cantidad", this.form.get('cantidad')?.value);
+    let updatedQty: any = {
+      "cantidad" : this.form.get('cantidad')?.value
+    }
+
+
+    this.productsService.setQuantity(prodId, updatedQty).subscribe(res => {
+      this.data = res;
+      console.log(this.data);
+      window.location.reload();
+    });
+    //this.router.navigate(['products/'+prodId]);
   }
 
 }

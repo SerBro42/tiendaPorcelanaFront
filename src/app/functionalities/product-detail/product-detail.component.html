@@ -4,7 +4,8 @@
     <div class="h4 card-title">{{product.nombre}}</div>
     <p class="card-text">Category: {{getCategoryName(product.id_cat)}}</p>
     <p class="card-text">{{product.descripcion}}</p>
-    <p class="card-text">{{product.cod_prod}}</p>
+    <p class="card-text">Product code: {{product.cod_prod}}</p>
+    <p class="cart-text h3 text-end">Remaining stock: {{product.cantidad}}</p>
   </div>
   <hr>
   <div class="card-footer text-muded">
@@ -13,6 +14,18 @@
   <div class="d-flex flex-row justify-content-around">
     <div *ngIf="UserProfile?.id_role == 0" class="col d-flex justify-content-start">
       <button class="btn btn-danger ml-3" (click)="deleteProduct()">Delete</button>
+    </div>
+    <div *ngIf="UserProfile?.id_role == 0" class="my-1 mx-3 p-3 custom-container">
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-group">
+
+          <label for="cantidad">Update product quantity</label>
+          <input type="number" formControlName="cantidad" name="cantidad" id="cantidad" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.cantidad.errors, 'is-valid': submitted && f.cantidad.valid }" placeholder="{{product.cantidad}}">
+
+        </div>
+        <button type="submit" class="btn btn-dark btn-sm mt-4">Update quantity</button>
+      </form>
     </div>
     <div class="col d-flex justify-content-end">
       <button class="btn btn-primary ml-3" (click)="goBack()">Return</button>
