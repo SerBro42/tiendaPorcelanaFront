@@ -10,6 +10,7 @@ import { ProductsComponent } from './functionalities/products/products.component
 import { ProductDetailComponent } from './functionalities/product-detail/product-detail.component';
 import { ProductsResolverService } from './resolvers/products-resolver.service';
 import { CartComponent } from './functionalities/cart/cart.component';
+import { EditprofileComponent } from './functionalities/editprofile/editprofile.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'home'},
@@ -24,6 +25,7 @@ const routes: Routes = [
     component: ProductDetailComponent,
     resolve: {product: ProductsResolverService}},
   { path: 'cart', component: CartComponent},
+  { path: 'editprofile', component: EditprofileComponent},
 ];
 
 @NgModule({

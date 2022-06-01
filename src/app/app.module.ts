@@ -26,6 +26,7 @@ import { ProductsModule } from './functionalities/products/products.module';
 import { ProductDetailComponent } from './functionalities/product-detail/product-detail.component';
 import { CartComponent } from './functionalities/cart/cart.component';
 import { CartItemComponent } from './functionalities/cart/cart-item/cart-item.component';
+import { EditprofileComponent } from './functionalities/editprofile/editprofile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CartItemComponent } from './functionalities/cart/cart-item/cart-item.co
     ProductDetailComponent,
     CartComponent,
     CartItemComponent,
+    EditprofileComponent,
   ],
   imports: [
     BrowserModule,
