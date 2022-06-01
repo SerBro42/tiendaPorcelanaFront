@@ -19,9 +19,9 @@ export class ProductsService {
     });
   }
 
-  setQuantity(id: any, cantidad: any) {
+  setQuantity(id: any, data: any) {
     const headers = new HttpHeaders();
-    return this.http.put(environment.apiUrl+`/api/setQuantity/${id}`, cantidad, {
+    return this.http.put(environment.apiUrl+`/api/setData/${id}`, data, {
       headers: headers
     });
   }

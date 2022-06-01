@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/classes/categoria';
 import { Product } from 'src/app/classes/product';
@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class ProductDetailComponent implements OnInit {
 
   product!: Product;
+  currentQty!: number;
   UserProfile!: User;
   prodCategories: Categoria[] = [];
   imagePath: any = environment.apiUrl+'/storage/images/';
@@ -52,7 +53,10 @@ export class ProductDetailComponent implements OnInit {
       this.product = this.route.snapshot.data['product'];
       console.log(this.product);
       console.log('Product fetched');
-    })
+    });
+    this.form.get('precio')?.setValue(this.product.precio);
+    this.form.get('cantidad')?.setValue(this.product.cantidad);
+
   }
 
   goBack() {
@@ -74,7 +78,8 @@ export class ProductDetailComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      cantidad: [null],
+      precio: [null, Validators.required],
+      cantidad: [null, Validators.required],
     })
   }
 
@@ -90,13 +95,15 @@ export class ProductDetailComponent implements OnInit {
       return;
     }
     const formData = new FormData();
+    formData.append("precio", this.form.get('precio')?.value);
     formData.append("cantidad", this.form.get('cantidad')?.value);
-    let updatedQty: any = {
+    let updatedData: any = {
+      "precio" : this.form.get('precio')?.value,
       "cantidad" : this.form.get('cantidad')?.value
     }
 
 
-    this.productsService.setQuantity(prodId, updatedQty).subscribe(res => {
+    this.productsService.setQuantity(prodId, updatedData).subscribe(res => {
       this.data = res;
       console.log(this.data);
       window.location.reload();
