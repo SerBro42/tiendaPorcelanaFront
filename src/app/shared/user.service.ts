@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../classes/user';
 
@@ -17,6 +18,11 @@ export class UserService {
     return this.http.patch(environment.apiUrl+`/api/user/edit/${id}`, data, {
       headers: headers
     });
+  }
+
+  //Get users
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.apiUrl+'/api/getUsers/');
   }
 
 }

@@ -3,4 +3,5 @@ export class InvoiceRow {
   cantidad: any;
   id_prod: any;
   precio: any;
+  created_at: any;
 }

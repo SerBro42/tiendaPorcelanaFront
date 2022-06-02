@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -27,6 +27,7 @@ import { ProductDetailComponent } from './functionalities/product-detail/product
 import { CartComponent } from './functionalities/cart/cart.component';
 import { CartItemComponent } from './functionalities/cart/cart-item/cart-item.component';
 import { EditprofileComponent } from './functionalities/editprofile/editprofile.component';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,9 @@ import { EditprofileComponent } from './functionalities/editprofile/editprofile.
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule,
   ],
   providers: [
     {
@@ -60,6 +63,7 @@ import { EditprofileComponent } from './functionalities/editprofile/editprofile.
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

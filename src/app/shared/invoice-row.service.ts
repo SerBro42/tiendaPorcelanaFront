@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { InvoiceRow } from '../classes/invoice-row';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +17,9 @@ export class InvoiceRowService {
       headers: headers
     });
   }
+
+    //Get invoice rows
+    getInvoiceRows(): Observable<InvoiceRow[]> {
+      return this.http.get<InvoiceRow[]>(environment.apiUrl+'/api/getInvoiceRows/');
+    }
 }

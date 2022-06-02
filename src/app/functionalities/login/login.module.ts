@@ -5,6 +5,8 @@ import { UserProfileComponent } from 'src/app/components/user-profile/user-profi
 import { SigninComponent } from 'src/app/components/signin/signin.component';
 import { SignupComponent } from 'src/app/components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ]
 })
 export class LoginModule { }

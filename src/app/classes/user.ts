@@ -4,4 +4,5 @@ export class User {
   email: any;
   address: any;
   id_role: any;
+  created_at: any;
 }
