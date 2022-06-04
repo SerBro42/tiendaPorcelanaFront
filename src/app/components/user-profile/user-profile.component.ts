@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
   allUsers: User[] = [];
   allInvoiceRows: InvoiceRow[] = [];
 
-  displayedColumns: string[] = ['name', 'email', 'address', 'created_at', 'id_role'];
+  displayedColumns: string[] = ['name', 'email', 'address', 'created_at', 'id_role', 'promote'];
   displayedColumns2: string[] = ['id_pedido', 'cantidad', 'id_prod', 'precio', 'created_at'];
   //placeholder data for experimentation (dataSource)
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -89,6 +89,14 @@ export class UserProfileComponent implements OnInit {
   getProductName(id: any) {
     let prodName = this.productsList.filter(function(item) {return item.id === id})[0];
     return prodName.nombre;
+  }
+
+  promoteToAdmin(id: any) {
+    this.userService.promoteToAdmin(id).subscribe(res => {
+      console.log(res);
+      window.location.reload();
+    });
+    console.log('User promoted: ',id);
   }
 
 }
