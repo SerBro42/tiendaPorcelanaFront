@@ -20,13 +20,13 @@ export class UserService {
     });
   }
 
-    //Change user role to Administrator
-    promoteToAdmin(id: any) {
-      const headers = new HttpHeaders();
-      return this.http.patch(environment.apiUrl+`/api/user/promoteToAdmin/${id}`, {
-        headers: headers
-      });
-    }
+  //Change user role to Administrator
+  promoteToAdmin(id: any) {
+    const headers = new HttpHeaders();
+    return this.http.patch(environment.apiUrl+`/api/user/promoteToAdmin/${id}`, {
+      headers: headers
+    });
+  }
 
   //Get users
   getUsers(): Observable<User[]> {

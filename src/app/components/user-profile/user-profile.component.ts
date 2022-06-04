@@ -24,18 +24,24 @@ export class UserProfileComponent implements OnInit {
   productsList: Product[] = [];
   allUsers: User[] = [];
   allInvoiceRows: InvoiceRow[] = [];
+  allUserInvoiceRows: InvoiceRow[] = [];
 
   displayedColumns: string[] = ['name', 'email', 'address', 'created_at', 'id_role', 'promote'];
   displayedColumns2: string[] = ['id_pedido', 'cantidad', 'id_prod', 'precio', 'created_at'];
+  displayedColumns3: string[] = ['id_pedido', 'cantidad', 'id_prod', 'precio', 'created_at'];
+
   //placeholder data for experimentation (dataSource)
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   //actual data (dataSource2)
   dataSource2: any;
   dataSource3: any;
+  dataSource4: any;
   @ViewChild('paginator1') paginator1!: MatPaginator;
   @ViewChild('sort1') sort1!: MatSort;
   @ViewChild('paginator2') paginator2!: MatPaginator;
   @ViewChild('sort2') sort2!: MatSort;
+  @ViewChild('paginator3') paginator3!: MatPaginator;
+  @ViewChild('sort3') sort3!: MatSort;
 
   constructor(
     public roleService: RolesService,
@@ -53,15 +59,17 @@ export class UserProfileComponent implements OnInit {
     this.roleService.getRoles().subscribe(res => {
       this.userRoles = res;
     });
+    this.invoiceRowService.getInvoiceRows().subscribe(res => {
+      this.allInvoiceRows = res;
+    });
     this.productsService.getProductosHTTP().subscribe(res => {
       this.productsList = res;
     })
     this.userService.getUsers().subscribe(res => {
       this.allUsers = res;
     });
-    this.invoiceRowService.getInvoiceRows().subscribe(res => {
-      this.allInvoiceRows = res;
-    });
+
+
     /* Las siguientes líneas no se cargan si se ponen en ngOnInit. Deben ir en ngAfterViewInit */
     //this.dataSource.paginator = this.paginator;
     //setTimeout(() => this.dataSource.paginator = this.paginator);
@@ -71,6 +79,13 @@ export class UserProfileComponent implements OnInit {
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
+    //Unlike datasource 2 and datasource3, datasource4 will not initialize if
+    //written out of scope of the subscribe function.
+    this.invoiceRowService.getUserInvoiceRows(this.UserProfile.id).subscribe(res => {
+      this.dataSource4 = new MatTableDataSource(res);
+      this.dataSource4.paginator = this.paginator3;
+      this.dataSource4.sort = this.sort3;
+    });
     //dataSourceX must be assigned a value in ngAfterViewInit, otherwise, it's empty
     this.dataSource2 = new MatTableDataSource(this.allUsers);
     this.dataSource2.paginator = this.paginator1;
@@ -79,6 +94,9 @@ export class UserProfileComponent implements OnInit {
     this.dataSource3 = new MatTableDataSource(this.allInvoiceRows);
     this.dataSource3.paginator = this.paginator2;
     this.dataSource3.sort = this.sort2;
+  }
+  ngAfterContentInit() {
+
   }
 
   getRoleName(id: any) {
@@ -92,11 +110,13 @@ export class UserProfileComponent implements OnInit {
   }
 
   promoteToAdmin(id: any) {
-    this.userService.promoteToAdmin(id).subscribe(res => {
-      console.log(res);
-      window.location.reload();
-    });
-    console.log('User promoted: ',id);
+    if(confirm('Are you sure you want to change user '+id+' to Administrator?')) {
+      this.userService.promoteToAdmin(id).subscribe(res => {
+        console.log(res);
+        window.location.reload();
+      });
+      console.log('User promoted: ',id);
+    }
   }
 
 }

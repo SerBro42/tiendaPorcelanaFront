@@ -21,6 +21,7 @@
   </div>
 </div>
 <div class="container my-2" *ngIf="UserProfile.id_role === 0">
+  <!--List of all users visible to ADMINS-->
   <div class="h3">List of users</div>
   <div class="wrapper">
     <table
@@ -66,7 +67,8 @@
     ></mat-paginator>
   </div>
 
-    <div class="h3">List of purchased products</div>
+  <!--List of all purchases by all users visible to ADMINS-->
+  <div class="h3">List of all purchased products</div>
     <div class="wrapper">
     <table
      mat-table
@@ -104,5 +106,47 @@
       showFirstLastButtons
     ></mat-paginator>
   </div>
+</div>
+
+<!--Lists the purchase history of a particular USER-->
+<div class="container my-2" *ngIf="UserProfile.id_role === 1">
+  <div class="h3">List of your purchases</div>
+  <div class="wrapper">
+  <table
+   mat-table
+   [dataSource]="dataSource4"
+   #sort3="matSort"
+   matSort class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="id_pedido">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id_pedido}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount purchased </th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+    </ng-container>
+    <ng-container matColumnDef="id_prod">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+      <td mat-cell *matCellDef="let element"> {{getProductName(element.id_prod)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price per unit </th>
+      <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
+    </ng-container>
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of purchase </th>
+      <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+  </table>
+  <mat-paginator
+    #paginator3="matPaginator"
+    [pageSize]="3"
+    [pageSizeOptions]="[5, 10, 15]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
 </div>
 

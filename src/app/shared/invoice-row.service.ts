@@ -22,4 +22,9 @@ export class InvoiceRowService {
     getInvoiceRows(): Observable<InvoiceRow[]> {
       return this.http.get<InvoiceRow[]>(environment.apiUrl+'/api/getInvoiceRows/');
     }
+
+    //Get invoice rows
+    getUserInvoiceRows(id: any): Observable<InvoiceRow[]> {
+      return this.http.get<InvoiceRow[]>(environment.apiUrl+`/api/getUserInvoiceRows/${id}`);
+    }
 }
