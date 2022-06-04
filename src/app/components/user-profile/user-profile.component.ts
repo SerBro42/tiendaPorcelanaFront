@@ -32,10 +32,10 @@ export class UserProfileComponent implements OnInit {
   //actual data (dataSource2)
   dataSource2: any;
   dataSource3: any;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator2!: MatPaginator;
-  @ViewChild(MatSort) sort2!: MatSort;
+  @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('sort1') sort1!: MatSort;
+  @ViewChild('paginator2') paginator2!: MatPaginator;
+  @ViewChild('sort2') sort2!: MatSort;
 
   constructor(
     public roleService: RolesService,
@@ -73,12 +73,12 @@ export class UserProfileComponent implements OnInit {
     // this.dataSource.sort = this.sort;
     //dataSourceX must be assigned a value in ngAfterViewInit, otherwise, it's empty
     this.dataSource2 = new MatTableDataSource(this.allUsers);
-    this.dataSource2.paginator = this.paginator;
-    this.dataSource2.sort = this.sort;
+    this.dataSource2.paginator = this.paginator1;
+    this.dataSource2.sort = this.sort1;
 
     this.dataSource3 = new MatTableDataSource(this.allInvoiceRows);
-    this.dataSource3.paginator2 = this.paginator2;
-    this.dataSource3.sort2 = this.sort2;
+    this.dataSource3.paginator = this.paginator2;
+    this.dataSource3.sort = this.sort2;
   }
 
   getRoleName(id: any) {
