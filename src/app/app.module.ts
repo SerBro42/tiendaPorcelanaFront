@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +28,8 @@ import { CartComponent } from './functionalities/cart/cart.component';
 import { CartItemComponent } from './functionalities/cart/cart-item/cart-item.component';
 import { EditprofileComponent } from './functionalities/editprofile/editprofile.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    Title,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

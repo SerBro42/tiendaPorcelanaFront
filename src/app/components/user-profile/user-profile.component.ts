@@ -11,6 +11,7 @@ import { InvoiceRow } from 'src/app/classes/invoice-row';
 import { InvoiceRowService } from 'src/app/shared/invoice-row.service';
 import { Product } from 'src/app/classes/product';
 import { ProductsService } from 'src/app/shared/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -49,6 +50,7 @@ export class UserProfileComponent implements OnInit {
     public userService: UserService,
     public invoiceRowService: InvoiceRowService,
     public productsService: ProductsService,
+    public router: Router,
     ) {
     this.authService.profileUser().subscribe((data: any) => {
       this.UserProfile = data;

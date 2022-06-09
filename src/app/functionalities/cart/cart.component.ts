@@ -8,6 +8,8 @@ import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/shared/auth.service';
 import { OrderService } from 'src/app/shared/order.service';
 import { InvoiceRowService } from 'src/app/shared/invoice-row.service';
+import { Router } from '@angular/router';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -37,7 +39,8 @@ export class CartComponent implements OnInit {
     public authService: AuthService,
     public orderService: OrderService,
     private invoiceRowService: InvoiceRowService,
-
+    private router: Router,
+    private cartService: CartService
   ) {
     this.loadCartItems();
     this.totalCostCalculation();
@@ -147,5 +150,7 @@ export class CartComponent implements OnInit {
       timeOut: 2000,
       progressBar: true
     });
+    this.cartService.removeCartToken();
+    this.router.navigate(['products']);
   }
 }

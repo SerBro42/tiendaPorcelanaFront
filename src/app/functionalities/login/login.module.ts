@@ -7,6 +7,7 @@ import { SignupComponent } from 'src/app/components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AngularMaterialModule } from 'src/app/angular-material/angular-material
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    AppRoutingModule,
   ]
 })
 export class LoginModule { }
