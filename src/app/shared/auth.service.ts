@@ -21,14 +21,14 @@ export class AuthService {
 
     // User registration
     register(user: User): Observable<any> {
-      return this.http.post(environment.apiUrl+'/api/auth/register', user);
+      return this.http.post(environment.apiUrl+'/api/auth/register/', user);
     }
     // Login
     signin(user: User): Observable<any> {
-      return this.http.post<any>(environment.apiUrl+'/api/auth/login', user);
+      return this.http.post<any>(environment.apiUrl+'/api/auth/login/', user);
     }
     // Access user profile
     profileUser(): Observable<any> {
-      return this.http.get(environment.apiUrl+'/api/auth/user-profile');
+      return this.http.get(environment.apiUrl+'/api/auth/user-profile/');
     }
 }
